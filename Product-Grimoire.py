@@ -18,7 +18,6 @@ Para cada produto na sua planilha, o script vai:
 ## Como Usar
 
 1.  **Instale as dependências:**
-    A nova versão usa a biblioteca `tqdm` para uma barra de progresso visual.
     ```bash
     pip install pandas requests beautifulsoup4 google-api-python-client google-generativeai openpyxl tqdm
     ```
@@ -61,7 +60,6 @@ OUTPUT_FILENAME = 'produtos_formatados.xlsx'
 
 def search_product_page_url(product_name, service, cse_id):
     """Usa a busca do Google para achar a página de um produto."""
-    # A impressão foi removida daqui para não poluir a saída da barra de progresso
     try:
         result = service.cse().list(q=product_name, cx=cse_id, num=1).execute()
         if 'items' in result and result['items']:
@@ -279,7 +277,7 @@ def main():
             "Referência / SKU": sku,
             "Peso": 0,
             "Estoque": quantity,
-            "URL da Imagem": image_url if "não encontrada" not in image_url else "https://placehold.co/600x400/eee/ccc?text=Imagem+Nao+Encontrada",
+            "URL da Imagem": image_url if "não encontrada" not in image_url else "Imagem+Nao+Encontrada",
             "Situação": "Ativo",
             "Caminho Imagem Local": local_image_path,
             "URL Origem Página": product_page_url or "N/D",
